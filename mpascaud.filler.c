@@ -6,7 +6,7 @@
 /*   By: mpascaud <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 16:38:30 by mpascaud          #+#    #+#             */
-/*   Updated: 2018/03/08 19:24:00 by mpascaud         ###   ########.fr       */
+/*   Updated: 2018/03/08 21:06:56 by mpascaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	ft_war(t_data *data, char *tmp, int war)
 
 	i = 4;
 	k = 0;
-	data->war[war] = (char*)malloc(sizeof(char) * (data->board[1]  + 1));
+	data->war[war] = (char*)malloc(sizeof(char) * (data->board[1] + 1));
 	while (tmp[i])
 	{
 		data->war[war][k] = tmp[i];
@@ -95,9 +95,22 @@ void	ft_war(t_data *data, char *tmp, int war)
 
 }
 
-void	ft_shapiece(t_data *data, char *tmp, int piece)
+void	ft_shapiece(t_data *data, char *tmp, int shapiece)
 {
+	int		i;
+	int		k;
 
+	i = 0;
+	k = 0;
+	data->shapiece[shapiece] = (char*)malloc(sizeof(char) * (data->piece[1] + 1));
+	while (tmp[i])
+	{
+		data->shapiece[shapiece][k] = tmp[i];
+		k++;
+		i++;
+	}
+	data->shapiece[shapiece][k] = '\0';
+//	dprintf(FDtest, "coucou%s\n", data->shapiece[shapiece]);
 }
 
 
@@ -129,7 +142,7 @@ int		main(void)
 		{
 			if (war == 0)
 			{
-				data->war = (char**)malloc(sizeof(char*) * 100);
+				data->war = (char**)malloc(sizeof(char*) * data->board[0]);
 			//	alloc = 1;
 			}
 			ft_war(data, tmp, war);
@@ -148,15 +161,22 @@ int		main(void)
 			}
 			ft_shapiece(data, tmp, shapiece);
 			shapiece++;
+			if (shapiece == data->piece[0])
+			{
+				//ft_filler(data);
+				//ft_free(data, war, shapiece);
+				dprintf(FDtest, "coucou\n");
+			//	break ;
+			}
 		}
 
 	}
-/*	int i;
+	int i;
 	i = 0;
 	while (data->war[i])
 	{
 		dprintf(FDtest, "%s\n", data->war[i]);
 		i++;
-	}*/
+	}
 	return (0);
 }
