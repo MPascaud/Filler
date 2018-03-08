@@ -6,7 +6,7 @@
 /*   By: mpascaud <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/01 14:09:45 by mpascaud          #+#    #+#             */
-/*   Updated: 2018/03/08 16:31:55 by mpascaud         ###   ########.fr       */
+/*   Updated: 2018/03/08 16:54:50 by mpascaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,10 @@ char    *ft_strcpy(char *dest, const char *src);
 int     get_next_line(const int fd, char **line);
 char    *ft_strstr(const char *haystack, const char *needle);
 
+typedef struct	s_data
+{
+	int		*board;
+}				t_data;
 
 
 #endif
