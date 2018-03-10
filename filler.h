@@ -6,7 +6,7 @@
 /*   By: mpascaud <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/01 14:09:45 by mpascaud          #+#    #+#             */
-/*   Updated: 2018/03/08 19:20:17 by mpascaud         ###   ########.fr       */
+/*   Updated: 2018/03/10 21:38:32 by mpascaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,18 @@
 # include <stdio.h>
 # include <string.h>
 
+int     get_next_line(const int fd, char **line);
+char    *ft_strstr(const char *haystack, const char *needle);
 int		get_next_line(const int fd, char **line);
 size_t      ft_strlen(const char *s);
 char    *ft_strncat(char *dest, const char *src, size_t n);
 char    *ft_strnew(size_t size);
 char    *ft_strcpy(char *dest, const char *src);
-int     get_next_line(const int fd, char **line);
-char    *ft_strstr(const char *haystack, const char *needle);
 
 typedef struct	s_data
 {
+	char	me;
+	char	opp;
 	int		*board;
 	char	**war;
 	int		*piece;
