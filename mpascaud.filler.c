@@ -6,7 +6,7 @@
 /*   By: mpascaud <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 16:38:30 by mpascaud          #+#    #+#             */
-/*   Updated: 2018/03/11 01:28:36 by mpascaud         ###   ########.fr       */
+/*   Updated: 2018/03/11 03:05:29 by mpascaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -294,6 +294,55 @@ void	ft_heatmap(t_data *data)
 	}
 }
 
+void	ft_heatmap2(t_data *data)
+{
+	int		line;
+	int		i;
+	int		change;
+	int		heat;
+
+	line = 0;
+	i = 0;
+	change = 0;
+	heat = 9;
+	while (data->war[line] != NULL)
+	{
+		while (data->war[line][i])
+		{
+			if (data->war[line][i] > '1' && data->war[line][i] <= '9')
+			{
+				change = i;
+				heat = data->war[line][i] - '0';
+				while (change >= 0 && heat >= 0)
+				{
+					if (data->war[line][change] != data->me && data->war[line][change] != data->opp
+							&& data->war[line][change] < heat + '0')
+					{
+						data->war[line][change] = heat + '0';
+					}
+					heat--;
+					change--;
+				}
+				change = i;
+				heat = data->war[line][i] - '0';
+				while (data->war[line][change] && heat >= 0)
+				{
+					if (data->war[line][change] != data->me && data->war[line][change] != data->opp
+							&& data->war[line][change] < heat + '0')
+					{
+						data->war[line][change] = heat + '0';
+					}
+					heat--;
+					change++;
+				}
+			}
+			i++;
+		}
+		i = 0;
+		line++;
+	}
+}
+
 int		main(void)
 {
 	char	*tmp;
@@ -361,6 +410,8 @@ int		main(void)
 				{
 					data->shapiece[shapiece] = (char*)malloc(sizeof(char));
 					data->shapiece[shapiece] = NULL;
+					ft_heatmap(data);
+					ft_heatmap2(data);
 					break ;
 				}
 			}
@@ -372,7 +423,6 @@ int		main(void)
 		write(1, "12 14\n", 6);
 		if (tmp[0] == '=')
 			break ;
-		ft_heatmap(data);
 		ft_afficher_variables(data, tmp, war, shapiece);
 		ft_free(&data, &war, &shapiece);
 	}
