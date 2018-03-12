@@ -6,7 +6,7 @@
 /*   By: mpascaud <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 16:38:30 by mpascaud          #+#    #+#             */
-/*   Updated: 2018/03/11 03:05:29 by mpascaud         ###   ########.fr       */
+/*   Updated: 2018/03/12 20:22:18 by mpascaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 
 #include "filler.h"
-#define FDtest open("/dev/ttys001", O_RDWR)
+#define FDtest open("/dev/ttys000", O_RDWR)
 
 
 
@@ -343,6 +343,92 @@ void	ft_heatmap2(t_data *data)
 	}
 }
 
+void	ft_putchar(char c)
+{
+	write(1, &c, 1);
+}
+
+void    ft_putnbr(int nb)
+{
+	if (nb < 0)
+	{
+		ft_putchar('-');
+		if (nb == -2147483648)
+		{
+			ft_putchar('2');
+			nb = -147483648;
+		}
+	nb = -nb;
+	}
+	if (nb >= 10)
+	{
+		ft_putnbr(nb / 10);
+	}
+	ft_putchar((nb % 10) + '0');
+}
+
+
+int			ft_possible(t_data *data)
+{
+	int		i;
+	int		j;
+	int		k;
+	int		l;
+	int		possible;
+
+	i = 0;
+	j = 0;
+	k = 0;
+	l = 0;
+	possible = 0;
+	while (data->war[i] != NULL)
+	{
+	//	dprintf(FDtest, "data->war[%d] = %s\n", i, data->war[i]);
+		while (data->war[i][j])
+		{
+			//dprintf(FDtest, "data->war[%d][%d] = %c\n", i, j, data->war[i][j]);
+			while (data->shapiece[k] != NULL)
+			{
+	//			dprintf(FDtest, "data->shapiece[%d] = %s\n", k, data->shapiece[k]);
+				while (data->shapiece[k][l])
+				{
+					if (data->shapiece[k][l] == '*')
+					{
+						if (data->war[k + i][l + j] == data->me)
+						{
+							possible++;
+						}
+						if (data->war[k + i][l + j] == data->opp)
+						{
+							possible = 2;
+						}
+						//dprintf(FDtest, "coucou\n");
+					}
+					l++;
+				}
+				l = 0;
+				k++;
+			}
+			if (possible == 1)
+			{
+				ft_putnbr(i);
+				write(1, " ", 1);
+				ft_putnbr(j);
+				write(1, "\n", 1);
+				return (1);
+			}
+			possible = 0;
+			k = 0;
+			j++;
+		}
+		j = 0;
+		i++;
+	}
+	write(1, "0 0\n", 4);
+	return (0);
+}
+
+
 int		main(void)
 {
 	char	*tmp;
@@ -357,7 +443,7 @@ int		main(void)
 	{
 		while (get_next_line(0, &tmp) > 0)
 		{
-			if (tmp[0] == '=')//si on ne peut plus poser
+			if (tmp[0] == '=' || tmp == NULL/*ajout anti leaks et seg*/)//si on ne peut plus poser
 			{
 				//write 0 0
 				//free data
@@ -388,7 +474,7 @@ int		main(void)
 				}
 				ft_war(data, tmp, war);
 				war++;
-				if (war == data->board[0])
+				if (war == data->board[0] || tmp == NULL/*rajout segfault*/)
 				{
 					data->war[war] = (char*)malloc(sizeof(char));
 					data->war[war] = NULL;
@@ -406,23 +492,27 @@ int		main(void)
 				}
 				ft_shapiece(data, tmp, shapiece);
 				shapiece++;
-				if (shapiece == data->piece[0])
+				if (shapiece == data->piece[0] || tmp == NULL/*2e rajout segfault*/)
 				{
 					data->shapiece[shapiece] = (char*)malloc(sizeof(char));
 					data->shapiece[shapiece] = NULL;
-					ft_heatmap(data);
-					ft_heatmap2(data);
+					//ft_heatmap(data);
+					//ft_heatmap2(data);
 					break ;
 				}
 			}
 		}
 		//ft_filler(data);
 		//si on ne peut plus poser, break ici aussi
+		if (tmp[0] == '=')
+			break ;
+		if (tmp == NULL)
+			break ;
 	//	write(1, "0 0\n", 4);
 	//	write(1, "8 2\n", 4);
 		write(1, "12 14\n", 6);
-		if (tmp[0] == '=')
-			break ;
+		//dprintf(FDtest, "possible = %d\n", ft_possible(data));
+	//	ft_possible(data);
 		ft_afficher_variables(data, tmp, war, shapiece);
 		ft_free(&data, &war, &shapiece);
 	}
