@@ -6,7 +6,7 @@
 /*   By: mpascaud <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 16:38:30 by mpascaud          #+#    #+#             */
-/*   Updated: 2018/03/12 20:22:18 by mpascaud         ###   ########.fr       */
+/*   Updated: 2018/03/12 20:47:11 by mpascaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -392,7 +392,7 @@ int			ft_possible(t_data *data)
 	//			dprintf(FDtest, "data->shapiece[%d] = %s\n", k, data->shapiece[k]);
 				while (data->shapiece[k][l])
 				{
-					if (data->shapiece[k][l] == '*')
+					if (data->shapiece[k][l] == '*' && (k + i) < data->board[0] && (l + j) < data->board[1])
 					{
 						if (data->war[k + i][l + j] == data->me)
 						{
@@ -411,10 +411,10 @@ int			ft_possible(t_data *data)
 			}
 			if (possible == 1)
 			{
-				ft_putnbr(i);
-				write(1, " ", 1);
-				ft_putnbr(j);
-				write(1, "\n", 1);
+			//	ft_putnbr(i);
+			//	write(1, " ", 1);
+			//	ft_putnbr(j);
+			//	write(1, "\n", 1);
 				return (1);
 			}
 			possible = 0;
@@ -424,7 +424,7 @@ int			ft_possible(t_data *data)
 		j = 0;
 		i++;
 	}
-	write(1, "0 0\n", 4);
+//	write(1, "0 0\n", 4);
 	return (0);
 }
 
@@ -508,11 +508,12 @@ int		main(void)
 			break ;
 		if (tmp == NULL)
 			break ;
-	//	write(1, "0 0\n", 4);
+		write(1, "0 0\n", 4);
 	//	write(1, "8 2\n", 4);
-		write(1, "12 14\n", 6);
+	//	write(1, "12 14\n", 6);
 		//dprintf(FDtest, "possible = %d\n", ft_possible(data));
-	//	ft_possible(data);
+		
+		ft_possible(data);
 		ft_afficher_variables(data, tmp, war, shapiece);
 		ft_free(&data, &war, &shapiece);
 	}
