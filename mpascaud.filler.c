@@ -6,7 +6,7 @@
 /*   By: mpascaud <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 16:38:30 by mpascaud          #+#    #+#             */
-/*   Updated: 2018/03/12 20:47:11 by mpascaud         ###   ########.fr       */
+/*   Updated: 2018/03/16 18:16:09 by mpascaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 
 #include "filler.h"
-#define FDtest open("/dev/ttys000", O_RDWR)
+//#define FDtest open("/dev/ttys000", O_RDWR)
 
 
 
@@ -25,7 +25,7 @@
 
 
 
-void	ft_board(t_data *data, char *tmp)
+/*void	ft_board(t_data *data, char *tmp)
 {
 	int		nb;
 	int		i;
@@ -48,11 +48,9 @@ void	ft_board(t_data *data, char *tmp)
 	}
 	data->board[1] = nb;
 	data->board[2] = '\0';
-//	dprintf(FDtest, "%d %d\n", data->board[0], data->board[1]);
+}*/
 
-}
-
-void	ft_piece(t_data *data, char *tmp)
+/*void	ft_piece(t_data *data, char *tmp)
 {
 	int		nb;
 	int		i;
@@ -75,10 +73,9 @@ void	ft_piece(t_data *data, char *tmp)
 	}
 	data->piece[1] = nb;
 	data->piece[2] = '\0';
-//	dprintf(FDtest, "%d %d\n", data->piece[0], data->piece[1]);
-}
+}*/
 
-void	ft_war(t_data *data, char *tmp, int war)
+/*void	ft_war(t_data *data, char *tmp, int war)
 {
 	int		i;
 	int		k;
@@ -93,12 +90,9 @@ void	ft_war(t_data *data, char *tmp, int war)
 		i++;
 	}
 	data->war[war][k] = '\0';
-//	data->war[war] = NULL;
-//	dprintf(FDtest, "coucou%s\n", data->war[war]);
+}*/
 
-}
-
-void	ft_shapiece(t_data *data, char *tmp, int shapiece)
+/*void	ft_shapiece(t_data *data, char *tmp, int shapiece)
 {
 	int		i;
 	int		k;
@@ -113,45 +107,14 @@ void	ft_shapiece(t_data *data, char *tmp, int shapiece)
 		i++;
 	}
 	data->shapiece[shapiece][k] = '\0';
-//	dprintf(FDtest, "coucou%s\n", data->shapiece[shapiece]);
 }
+*/
 
-void	ft_filler(t_data *data)
-{
-	
-}
 
-void	ft_free(t_data **data, int *war, int *shapiece)
+/*void	ft_afficher_variables(t_data *data, char *tmp, int war, int shapiece)
 {
 	int		i;
 
-	i = 0;
-	(*war) = 0;
-	(*shapiece) = 0;
-	free((*data)->board);
-	while ((*data)->war[i])
-	{
-		free((*data)->war[i]);
-		i++;
-	}
-	free((*data)->war[i]);
-	free((*data)->war);
-	free((*data)->piece);
-	i = 0;
-	while ((*data)->shapiece[i])
-	{
-		free((*data)->shapiece[i]);
-		i++;
-	}
-	free((*data)->shapiece[i]);
-	free((*data)->shapiece);
-}
-
-void	ft_afficher_variables(t_data *data, char *tmp, int war, int shapiece)
-{
-	int		i;
-
-	dprintf(FDtest, "----------------------------------------------------------------------\n");
 	dprintf(FDtest, "me = %c\n", data->me);
 	dprintf(FDtest, "opp = %c\n", data->opp);
 	dprintf(FDtest, "tmp = %s\n", tmp);
@@ -185,14 +148,13 @@ void	ft_afficher_variables(t_data *data, char *tmp, int war, int shapiece)
 		i++;
 	}
 	dprintf(FDtest, "data->shapiece[%d] = %s\n", i, data->shapiece[i]);
-	//dprintf(FDtest, "data->war[%d] = %s\n", 15, data->war[15]);
 	
 	dprintf(FDtest, "----------------------------------------------------------------------\n");
 
-}
+}*/
 
 
-void	ft_heatmap(t_data *data)
+/*void	ft_heatmap(t_data *data)
 {
 	int		line;
 	int		i;
@@ -201,7 +163,7 @@ void	ft_heatmap(t_data *data)
 
 	line = 0;
 	i = 0;
-	change = 0;//inutile
+	change = 0;
 	heat = 9;
 	while (data->war[line] != NULL)
 	{
@@ -214,7 +176,7 @@ void	ft_heatmap(t_data *data)
 		i = 0;
 		line++;
 	}
-	i = 0; //inutile
+	i = 0;
 	line = 0;
 	while (data->war[line] != NULL)
 	{
@@ -290,11 +252,10 @@ void	ft_heatmap(t_data *data)
 		}
 		i = 0;
 		line++;
-		//heat = 9;
 	}
 }
-
-void	ft_heatmap2(t_data *data)
+*/
+/*void	ft_heatmap2(t_data *data)
 {
 	int		line;
 	int		i;
@@ -341,14 +302,14 @@ void	ft_heatmap2(t_data *data)
 		i = 0;
 		line++;
 	}
-}
+}*/
 
-void	ft_putchar(char c)
+/*void	ft_putchar(char c)
 {
 	write(1, &c, 1);
-}
+}*/
 
-void    ft_putnbr(int nb)
+/*void    ft_putnbr(int nb)
 {
 	if (nb < 0)
 	{
@@ -365,10 +326,10 @@ void    ft_putnbr(int nb)
 		ft_putnbr(nb / 10);
 	}
 	ft_putchar((nb % 10) + '0');
-}
+}*/
 
 
-int			ft_possible(t_data *data)
+/*int			ft_possible(t_data *data)
 {
 	int		i;
 	int		j;
@@ -411,10 +372,11 @@ int			ft_possible(t_data *data)
 			}
 			if (possible == 1)
 			{
-			//	ft_putnbr(i);
-			//	write(1, " ", 1);
-			//	ft_putnbr(j);
-			//	write(1, "\n", 1);
+				ft_putnbr(i);
+				write(1, " ", 1);
+				ft_putnbr(j);
+				write(1, "\n", 1);
+				dprintf(FDtest, "ligne = %d, case = %d\n", i, j);
 				return (1);
 			}
 			possible = 0;
@@ -424,10 +386,36 @@ int			ft_possible(t_data *data)
 		j = 0;
 		i++;
 	}
+	dprintf(FDtest, "placement impossible");
 //	write(1, "0 0\n", 4);
 	return (0);
-}
+}*/
 
+void	ft_free(t_data **data, int *war, int *shapiece)
+{
+	int		i;
+
+	i = 0;
+	(*war) = 0;
+	(*shapiece) = 0;
+	free((*data)->board);
+	while ((*data)->war[i])
+	{
+		free((*data)->war[i]);
+		i++;
+	}
+	free((*data)->war[i]);
+	free((*data)->war);
+	free((*data)->piece);
+	i = 0;
+	while ((*data)->shapiece[i])
+	{
+		free((*data)->shapiece[i]);
+		i++;
+	}
+	free((*data)->shapiece[i]);
+	free((*data)->shapiece);
+}
 
 int		main(void)
 {
@@ -443,9 +431,9 @@ int		main(void)
 	{
 		while (get_next_line(0, &tmp) > 0)
 		{
-			if (tmp[0] == '=' || tmp == NULL/*ajout anti leaks et seg*/)//si on ne peut plus poser
+			if (tmp[0] == '=' /*|| tmp == NULL*//*ajout anti leaks et seg*/)//si on ne peut plus poser
 			{
-				//write 0 0
+				//write (1, "0 0\n", 4);
 				//free data
 				break ;
 			}
@@ -492,29 +480,34 @@ int		main(void)
 				}
 				ft_shapiece(data, tmp, shapiece);
 				shapiece++;
-				if (shapiece == data->piece[0] || tmp == NULL/*2e rajout segfault*/)
+				if (shapiece == data->piece[0] /*|| tmp == NULL*//*2e rajout segfault*/)
 				{
 					data->shapiece[shapiece] = (char*)malloc(sizeof(char));
 					data->shapiece[shapiece] = NULL;
+					ft_afficher_variables(data, tmp, war, shapiece);
+					ft_possible(data);
 					//ft_heatmap(data);
 					//ft_heatmap2(data);
+					//	write(1, "0 0\n", 4);
+					write(1, "8 2\n", 4);
+					//	write(1, "12 14\n", 6);
+					if (ft_possible(data) == 0)
+						write(1, "0 0\n", 4);
+				//	free(tmp);
+				//	tmp = NULL;
 					break ;
 				}
 			}
+			free(tmp);
+			tmp = NULL;
 		}
-		//ft_filler(data);
-		//si on ne peut plus poser, break ici aussi
-		if (tmp[0] == '=')
-			break ;
-		if (tmp == NULL)
-			break ;
-		write(1, "0 0\n", 4);
-	//	write(1, "8 2\n", 4);
-	//	write(1, "12 14\n", 6);
-		//dprintf(FDtest, "possible = %d\n", ft_possible(data));
-		
-		ft_possible(data);
-		ft_afficher_variables(data, tmp, war, shapiece);
+	//	sleep(1);
+//		if (tmp[0] == '=')
+//			break ;
+	//	if (tmp == NULL || tmp[0] == '\0')
+	//		break ;
+		//free(tmp);
+		//tmp = NULL;
 		ft_free(&data, &war, &shapiece);
 	}
 	return (0);
