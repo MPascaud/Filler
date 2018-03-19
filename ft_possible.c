@@ -6,7 +6,7 @@
 /*   By: mpascaud <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 16:56:37 by mpascaud          #+#    #+#             */
-/*   Updated: 2018/03/16 20:32:37 by mpascaud         ###   ########.fr       */
+/*   Updated: 2018/03/19 19:38:26 by mpascaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,11 @@ int         ft_possible(t_data *data)
 					if (data->shapiece[k][l] == '*' /*&& (k + i) < data->board[0] && (l + j) < data->board[1]*/)
 					{
 						if ((k + i) > (data->board[0] - 1) || (l + j) > (data->board[1] - 1))
+						{
 							possible = 2;
+							if (j == 0)
+								return (0);
+						}
 						if (data->war[k + i][l + j] == data->me)
 						{
 							possible++;

@@ -6,7 +6,7 @@
 /*   By: mpascaud <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 16:38:30 by mpascaud          #+#    #+#             */
-/*   Updated: 2018/03/19 18:19:08 by mpascaud         ###   ########.fr       */
+/*   Updated: 2018/03/19 19:49:57 by mpascaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -489,8 +489,6 @@ int		main(void)
 				{
 					data->shapiece[shapiece] = (char*)malloc(sizeof(char));
 					data->shapiece[shapiece] = NULL;
-					//ft_heatmap(data);
-					//ft_heatmap2(data);
 					//	write(1, "0 0\n", 4);
 					//write(1, "8 2\n", 4);
 					//	write(1, "12 14\n", 6);
@@ -506,6 +504,8 @@ int		main(void)
 			free(tmp);
 			tmp = NULL;
 		}
+		ft_heatmap(data);
+		ft_heatmap2(data);
 		ft_afficher_variables(data, tmp, war, shapiece);
 	//	ft_possible(data);
 	/*	if (ft_possible(data) == 0)
@@ -516,6 +516,12 @@ int		main(void)
 			//break ;
 			return (0);
 		}*/
+		if (ft_possible(data) == 0)
+		{
+			write(FDtest, "placement impossible\n", 21);
+			write (1, "0 0\n", 4);
+			return (0);
+		}
 		if (ft_test(data) == 0)
 			return (0);
 	//	sleep(1);

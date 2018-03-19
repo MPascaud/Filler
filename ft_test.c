@@ -6,7 +6,7 @@
 /*   By: mpascaud <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 18:32:28 by mpascaud          #+#    #+#             */
-/*   Updated: 2018/03/19 18:30:06 by mpascaud         ###   ########.fr       */
+/*   Updated: 2018/03/19 19:40:19 by mpascaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ int         ft_test(t_data *data)
 			}
 			if (possible == 1)
 			{
-				write(FDtest, "bloublou\n", 9);
 			//	dprintf(FDtest, "ligne = %d, case = %d\n", i, j);
 				ft_putnbr(i);
 				write(1, " ", 1);
