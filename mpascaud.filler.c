@@ -6,7 +6,7 @@
 /*   By: mpascaud <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 16:38:30 by mpascaud          #+#    #+#             */
-/*   Updated: 2018/03/16 18:16:09 by mpascaud         ###   ########.fr       */
+/*   Updated: 2018/03/19 18:19:08 by mpascaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -423,20 +423,25 @@ int		main(void)
 	t_data	*data;
 	int		war;
 	int		shapiece;
+	int		impossible;
 
 	war = 0;
 	shapiece = 0;
+	impossible = 0;
 	data = (t_data*)malloc(sizeof(t_data));
 	while (1)
 	{
-		while (get_next_line(0, &tmp) > 0)
+		while (get_next_line(0, &tmp))
 		{
-			if (tmp[0] == '=' /*|| tmp == NULL*//*ajout anti leaks et seg*/)//si on ne peut plus poser
-			{
+		//	/*if (tmp[0] == '=' ||*/ tmp == NULL/*ajout anti leaks et seg*/)//si on ne peut plus poser
+		//	{
 				//write (1, "0 0\n", 4);
 				//free data
-				break ;
-			}
+				//break ;
+		//		return (0);
+		//	}
+		//	if (tmp[0] == '\0')
+		//		return(0);
 			if (ft_strstr(tmp, "mpascaud"))
 			{
 				if (tmp[10] == '1')
@@ -484,30 +489,53 @@ int		main(void)
 				{
 					data->shapiece[shapiece] = (char*)malloc(sizeof(char));
 					data->shapiece[shapiece] = NULL;
-					ft_afficher_variables(data, tmp, war, shapiece);
-					ft_possible(data);
 					//ft_heatmap(data);
 					//ft_heatmap2(data);
 					//	write(1, "0 0\n", 4);
-					write(1, "8 2\n", 4);
+					//write(1, "8 2\n", 4);
 					//	write(1, "12 14\n", 6);
-					if (ft_possible(data) == 0)
-						write(1, "0 0\n", 4);
-				//	free(tmp);
-				//	tmp = NULL;
+			//		free(tmp);
+			//		tmp = NULL;
 					break ;
 				}
 			}
+			//if (ft_possible(data) == 0)
+			//	break ;
+		//	if (impossible == 1)
+		//		break ;
 			free(tmp);
 			tmp = NULL;
 		}
+		ft_afficher_variables(data, tmp, war, shapiece);
+	//	ft_possible(data);
+	/*	if (ft_possible(data) == 0)
+		{
+		//	write(FDtest, "pad place\n", 10);
+		//	write(1, "0 0\n", 4);
+		//	impossible = 1;
+			//break ;
+			return (0);
+		}*/
+		if (ft_test(data) == 0)
+			return (0);
 	//	sleep(1);
 //		if (tmp[0] == '=')
 //			break ;
 	//	if (tmp == NULL || tmp[0] == '\0')
 	//		break ;
-		//free(tmp);
-		//tmp = NULL;
+	//	if (tmp != NULL)
+	//	{
+		//	free(tmp);
+		//	tmp = NULL;
+	//	}
+		if (tmp == NULL)
+			break ;
+		if (impossible == 1)
+		{
+			//write(1, "0 0\n", 4);
+			ft_free(&data, &war, &shapiece);
+			break ;
+		}
 		ft_free(&data, &war, &shapiece);
 	}
 	return (0);

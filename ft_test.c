@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_possible.c                                      :+:      :+:    :+:   */
+/*   ft_test.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpascaud <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/16 16:56:37 by mpascaud          #+#    #+#             */
-/*   Updated: 2018/03/16 20:32:37 by mpascaud         ###   ########.fr       */
+/*   Created: 2018/03/16 18:32:28 by mpascaud          #+#    #+#             */
+/*   Updated: 2018/03/19 18:30:06 by mpascaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+
 
 
 #include "filler.h"
 
 
-int         ft_possible(t_data *data)
+int         ft_test(t_data *data)
 {
 	int     i;
 	int     j;
@@ -29,16 +31,24 @@ int         ft_possible(t_data *data)
 	possible = 0;
 	while (data->war[i] != NULL)
 	{
-		while (data->war[i][j])
+		while (data->war[i][j] != '\0')
 		{
 			while (data->shapiece[k] != NULL)
 			{
-				while (data->shapiece[k][l])
+				while (data->shapiece[k][l] != '\0')
 				{
 					if (data->shapiece[k][l] == '*' /*&& (k + i) < data->board[0] && (l + j) < data->board[1]*/)
 					{
 						if ((k + i) > (data->board[0] - 1) || (l + j) > (data->board[1] - 1))
+						{
+						//	dprintf(FDtest, "i = %d, j = %d, k = %d, l = %d\n", i, j, k, l);	
 							possible = 2;
+							if (j == 0)
+							{
+								write (1, "0 0\n", 4);
+								return (0);
+							}
+						}
 						if (data->war[k + i][l + j] == data->me)
 						{
 							possible++;
@@ -55,7 +65,12 @@ int         ft_possible(t_data *data)
 			}
 			if (possible == 1)
 			{
-				//dprintf(FDtest, "ligne = %d, case = %d\n", i, j);
+				write(FDtest, "bloublou\n", 9);
+			//	dprintf(FDtest, "ligne = %d, case = %d\n", i, j);
+				ft_putnbr(i);
+				write(1, " ", 1);
+				ft_putnbr(j);
+				write(1, "\n", 1);
 				return (1);
 			}
 			possible = 0;
@@ -65,7 +80,9 @@ int         ft_possible(t_data *data)
 		j = 0;
 		i++;
 	}
-	//dprintf(FDtest, "placement impossible");
+	write (1, "0 0\n", 4);
+	dprintf(FDtest, "placement impossible");
 	return (0);
 }
+
 

@@ -6,7 +6,7 @@
 /*   By: mpascaud <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/01 14:09:45 by mpascaud          #+#    #+#             */
-/*   Updated: 2018/03/16 17:30:08 by mpascaud         ###   ########.fr       */
+/*   Updated: 2018/03/16 18:33:34 by mpascaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,6 @@ void    ft_afficher_variables(t_data *data, char *tmp, int war, int shapiece);
 void    ft_putchar(char c);
 void    ft_putnbr(int nb);
 
+int         ft_test(t_data *data);
 
 #endif
