@@ -6,7 +6,7 @@
 /*   By: mpascaud <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 16:38:30 by mpascaud          #+#    #+#             */
-/*   Updated: 2018/03/19 19:49:57 by mpascaud         ###   ########.fr       */
+/*   Updated: 2018/03/19 23:45:21 by mpascaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -448,11 +448,15 @@ int		main(void)
 				{
 					data->me = 'O';
 					data->opp = 'X';
+			//		data->me = 300;
+			//		data->opp = 400;
 				}
 				else
 				{
 					data->me = 'X';
 					data->opp = 'O';
+			//		data->me = 400;
+			//		data->opp = 300;
 				}
 			}
 			if (ft_strstr(tmp, "Plateau"))
@@ -522,9 +526,11 @@ int		main(void)
 			write (1, "0 0\n", 4);
 			return (0);
 		}
-		if (ft_test(data) == 0)
-			return (0);
-	//	sleep(1);
+//		if (ft_test(data) == 0)
+//			return (0);
+		ft_place_heat(data);
+	//	ft_test(data);			
+//		sleep(1);
 //		if (tmp[0] == '=')
 //			break ;
 	//	if (tmp == NULL || tmp[0] == '\0')

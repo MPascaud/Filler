@@ -6,7 +6,7 @@
 /*   By: mpascaud <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 16:56:37 by mpascaud          #+#    #+#             */
-/*   Updated: 2018/03/19 19:38:26 by mpascaud         ###   ########.fr       */
+/*   Updated: 2018/03/19 21:47:30 by mpascaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int         ft_possible(t_data *data)
 			{
 				while (data->shapiece[k][l])
 				{
-					if (data->shapiece[k][l] == '*' /*&& (k + i) < data->board[0] && (l + j) < data->board[1]*/)
+					if (data->shapiece[k][l] == '*')
 					{
 						if ((k + i) > (data->board[0] - 1) || (l + j) > (data->board[1] - 1))
 						{
@@ -59,7 +59,6 @@ int         ft_possible(t_data *data)
 			}
 			if (possible == 1)
 			{
-				//dprintf(FDtest, "ligne = %d, case = %d\n", i, j);
 				return (1);
 			}
 			possible = 0;
@@ -69,7 +68,6 @@ int         ft_possible(t_data *data)
 		j = 0;
 		i++;
 	}
-	//dprintf(FDtest, "placement impossible");
 	return (0);
 }
 

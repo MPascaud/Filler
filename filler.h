@@ -6,7 +6,7 @@
 /*   By: mpascaud <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/01 14:09:45 by mpascaud          #+#    #+#             */
-/*   Updated: 2018/03/16 18:33:34 by mpascaud         ###   ########.fr       */
+/*   Updated: 2018/03/19 22:01:00 by mpascaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,19 @@ char    *ft_strcpy(char *dest, const char *src);
 
 typedef struct	s_data
 {
-	char	me;
-	char	opp;
+	int		me;
+	int		opp;
 	int		*board;
 	char	**war;
 	int		*piece;
 	char	**shapiece;
 }				t_data;
+typedef struct	s_heater
+{
+	int		heat;
+	int		i;
+	int		j;
+}				t_heater;
 int		ft_possible(t_data *data);
 void    ft_heatmap(t_data *data);
 void    ft_heatmap2(t_data *data);
@@ -53,6 +59,9 @@ void    ft_afficher_variables(t_data *data, char *tmp, int war, int shapiece);
 void    ft_putchar(char c);
 void    ft_putnbr(int nb);
 
-int         ft_test(t_data *data);
+int		ft_test(t_data *data);
+void	ft_place_heat(t_data *data);	
+
+
 
 #endif
