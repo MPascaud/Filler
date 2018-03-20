@@ -6,7 +6,7 @@
 /*   By: mpascaud <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 16:38:30 by mpascaud          #+#    #+#             */
-/*   Updated: 2018/03/19 23:45:21 by mpascaud         ###   ########.fr       */
+/*   Updated: 2018/03/20 18:02:48 by mpascaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -446,17 +446,17 @@ int		main(void)
 			{
 				if (tmp[10] == '1')
 				{
-					data->me = 'O';
-					data->opp = 'X';
-			//		data->me = 300;
-			//		data->opp = 400;
+			//		data->me = 'O';
+			//		data->opp = 'X';
+					data->me = 126;
+					data->opp = 127;
 				}
 				else
 				{
-					data->me = 'X';
-					data->opp = 'O';
-			//		data->me = 400;
-			//		data->opp = 300;
+			//		data->me = 'X';
+			//		data->opp = 'O';
+					data->me = 127;
+					data->opp = 126;
 				}
 			}
 			if (ft_strstr(tmp, "Plateau"))

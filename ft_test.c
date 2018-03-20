@@ -6,7 +6,7 @@
 /*   By: mpascaud <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 18:32:28 by mpascaud          #+#    #+#             */
-/*   Updated: 2018/03/19 23:40:13 by mpascaud         ###   ########.fr       */
+/*   Updated: 2018/03/20 18:47:24 by mpascaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,7 +166,7 @@ int		ft_possible_heat(t_data *data)
 			}
 			if (possible == 1)
 			{
-				if (thermometer > heater->heat)
+				if (thermometer > heater->heat && heater->heat < 117)
 				{
 					heater->heat = thermometer;
 					heater->i = i;
