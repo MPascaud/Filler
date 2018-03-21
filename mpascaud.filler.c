@@ -6,7 +6,7 @@
 /*   By: mpascaud <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 16:38:30 by mpascaud          #+#    #+#             */
-/*   Updated: 2018/03/21 15:30:30 by mpascaud         ###   ########.fr       */
+/*   Updated: 2018/03/21 16:23:10 by mpascaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,11 @@ int		main(void)
 	t_data	*data;
 	int		war;
 	int		shapiece;
-	int		impossible;
+//	int		impossible;
 
 	war = 0;
 	shapiece = 0;
-	impossible = 0;
+//	impossible = 0;
 	data = (t_data*)malloc(sizeof(t_data));
 	while (1)
 	{
@@ -147,16 +147,22 @@ int		main(void)
 			//break ;
 			return (0);
 		}*/
-		if (ft_possible(data) == 0)
+		if (ft_possible(data) == 0) //&& ft_possible2 == 0
 		{
+			ft_free(&data, &war, &shapiece);
+			free(data);
 			write(FDtest, "placement impossible\n", 21);
 			write (1, "0 0\n", 4);
 			return (0);
 		}
 //		if (ft_test(data) == 0)
 //			return (0);
-		ft_place_heat(data);
-	//	ft_test(data);			
+		if (ft_possible(data) == 1)
+		{
+			ft_place_heat(data);//if possible == 1
+		         	           //if possible == 0 && possible2 == 1
+		}
+//	ft_test(data);			
 //		sleep(1);
 //		if (tmp[0] == '=')
 //			break ;
@@ -169,14 +175,15 @@ int		main(void)
 	//	}
 		if (tmp == NULL)
 			break ;
-		if (impossible == 1)
-		{
+	//	if (impossible == 1)
+	//	{
 			//write(1, "0 0\n", 4);
-			ft_free(&data, &war, &shapiece);
-			break ;
-		}
+	//		ft_free(&data, &war, &shapiece);
+	//		break ;
+	//	}
+	//	while (1);
 		ft_free(&data, &war, &shapiece);
-		while (1);
 	}
+	free(data);
 	return (0);
 }
