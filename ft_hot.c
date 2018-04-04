@@ -1,38 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_piece.c                                         :+:      :+:    :+:   */
+/*   ft_hot.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpascaud <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/16 17:16:25 by mpascaud          #+#    #+#             */
-/*   Updated: 2018/04/03 18:29:17 by mpascaud         ###   ########.fr       */
+/*   Created: 2018/03/23 19:18:01 by mpascaud          #+#    #+#             */
+/*   Updated: 2018/04/04 12:55:07 by mpascaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-void	ft_piece(t_data *data, char *tmp)
+void	ft_hot(t_data *data)
 {
-	int		nb;
-	int		i;
-
-	data->piece = (int*)malloc(sizeof(int) * 3);
-	nb = 0;
-	i = 6;
-	while (tmp[i] != ' ')
+	if (data->board[1] == 0)
+		return ;
+	ft_heatmap(data);
+	ft_heatmap2(data);
+	if (data->board[1] == 40 && (data->me == 'X' || data->me == 127))
 	{
-		nb = (nb * 10) + (tmp[i] - '0');
-		i++;
+		ft_heatmap_01p2(data);
 	}
-	data->piece[0] = nb;
-	nb = 0;
-	i++;
-	while (tmp[i] != ':')
+	if (data->board[1] == 17 && (data->me == 'X' || data->me == 127))
 	{
-		nb = (nb * 10) + (tmp[i] - '0');
-		i++;
+		ft_heatmap_00p2(data);
 	}
-	data->piece[1] = nb;
-	data->piece[2] = '\0';
 }

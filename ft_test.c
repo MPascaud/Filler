@@ -6,209 +6,102 @@
 /*   By: mpascaud <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 18:32:28 by mpascaud          #+#    #+#             */
-/*   Updated: 2018/03/20 18:47:24 by mpascaud         ###   ########.fr       */
+/*   Updated: 2018/04/03 18:31:57 by mpascaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-
-
 #include "filler.h"
 
-
-
-
-
-
-
-
-
-
-
-
-
-int         ft_test(t_data *data)
+void	ft_initialization2(t_v2 *v2)
 {
-	int     i;
-	int     j;
-	int     k;
-	int     l;
-	int     possible;
-
-	i = 0;
-	j = 0;
-	k = 0;
-	l = 0;
-	possible = 0;
-	while (data->war[i] != NULL)
-	{
-		while (data->war[i][j] != '\0')
-		{
-			while (data->shapiece[k] != NULL)
-			{
-				while (data->shapiece[k][l] != '\0')
-				{
-					if (data->shapiece[k][l] == '*' /*&& (k + i) < data->board[0] && (l + j) < data->board[1]*/)
-					{
-						if ((k + i) > (data->board[0] - 1) || (l + j) > (data->board[1] - 1))
-						{
-							//	dprintf(FDtest, "i = %d, j = %d, k = %d, l = %d\n", i, j, k, l);	
-							possible = 2;
-							if (j == 0)
-							{
-								write (1, "0 0\n", 4);
-								return (0);
-							}
-						}
-						if (data->war[k + i][l + j] == data->me)
-						{
-							possible++;
-						}
-						if (data->war[k + i][l + j] == data->opp)
-						{
-							possible = 2;
-						}
-					}
-					l++;
-				}
-				l = 0;
-				k++;
-			}
-			if (possible == 1)
-			{
-				//	dprintf(FDtest, "ligne = %d, case = %d\n", i, j);
-				ft_putnbr(i);
-				write(1, " ", 1);
-				ft_putnbr(j);
-				write(1, "\n", 1);
-				return (1);
-			}
-			possible = 0;
-			k = 0;
-			j++;
-		}
-		j = 0;
-		i++;
-	}
-	write (1, "0 0\n", 4);
-	//	dprintf(FDtest, "placement impossible");
-	return (0);
+	v2->i = 0;
+	v2->j = 0;
+	v2->k = 0;
+	v2->l = 0;
+	v2->possible = 0;
+	v2->what = 0;
+	v2->midwhat = 0;
 }
 
-
-int		ft_possible_heat(t_data *data)
+int		ft_background(t_v2 *v2, t_data *data)
 {
-	int			i;
-	int			j;
-	int			k;
-	int			l;
-	int			possible;
-	int			thermometer;
-	t_heater	*heater;
-
-	i = 0;
-	j = 0;
-	k = 0;
-	l = 0;
-	possible = 0;
-	thermometer = 0;
-	heater = (t_heater*)malloc(sizeof(t_heater));
-	heater->heat = 0;
-	heater->i = 0;
-	heater->j = 0;
-//	ft_heatmap(data);
-//	ft_heatmap2(data);
-	while (data->war[i] != NULL)
+	if (data->shapiece[v2->k][v2->l] == '*')
 	{
-		while (data->war[i][j])
+		if ((v2->k + v2->i) > (data->board[0] - 1)
+				|| (v2->l + v2->j) > (data->board[1] - 1))
 		{
-			while (data->shapiece[k] != NULL)
+			v2->possible = 2;
+			if (v2->j == 0)
 			{
-				while (data->shapiece[k][l])
-				{
-					if (data->shapiece[k][l] == '*')
-					{
-						if ((k + i) > (data->board[0] - 1) || (l + j) > (data->board[1] - 1))
-						{
-							possible = 2;
-							if (j == 0)
-							{
-								write(FDtest, "j = 0\n", 6);
-								ft_putnbr(heater->i);
-								write(1, " ", 1);
-								ft_putnbr(heater->j);
-								write(1, "\n", 1);
-								dprintf(FDtest, "heater->heat = %d\n", heater->heat);
-								if (heater->heat > 0)
-									return (1);
-								return (0);
-							}
-						}
-						if (data->war[k + i][l + j] == data->me)
-						{
-							possible++;
-						}
-						if (data->war[k + i][l + j] == data->opp)
-						{
-							possible = 2;
-						}
-						if (thermometer < data->war[k + i][l + j] && data->war[k + i][l + j] != data->me
-								&& data->war[k + i][l + j] != data->opp)
-						{
-						//	dprintf(FDtest, "%d\n", data->war[k + i][l + j]); 
-							thermometer = data->war[k + i][l + j];
-						}
-					}
-					l++;
-				}
-				l = 0;
-				k++;
+				write(1, "0 0\n", 4);
+				return (0);
 			}
-			if (possible == 1)
-			{
-				if (thermometer > heater->heat && heater->heat < 117)
-				{
-					heater->heat = thermometer;
-					heater->i = i;
-					heater->j = j;
-					//return (1);
-				}
-			}
-			possible = 0;
-			k = 0;
-			thermometer = 0;
-			j++;
+			return (2);
 		}
-		//thermometer = 0;
-		j = 0;
-		i++;
+		if (data->war[v2->k + v2->i][v2->l + v2->j] == data->me)
+		{
+			(v2->possible)++;
+		}
+		if (data->war[v2->k + v2->i][v2->l + v2->j] == data->opp)
+		{
+			v2->possible = 2;
+		}
 	}
-	ft_putnbr(heater->i);
-	write(1, " ", 1);
-	ft_putnbr(heater->j);
-	write(1, "\n", 1);
-//	dprintf(FDtest, "heater->heat = %d\n", heater->heat);
-	if (heater->heat > 0)
+	(v2->l)++;
+	return (1);
+}
+
+int		ft_midground(t_v2 *v2, t_data *data)
+{
+	while (v2->k < data->piece[0])
+	{
+		while (v2->l < data->piece[1])
+		{
+			v2->what = ft_background(v2, data);
+			if (v2->what == 0)
+				return (0);
+			if (v2->what == 2)
+				return (2);
+		}
+		v2->l = 0;
+		(v2->k)++;
+	}
+	if (v2->possible == 1)
+	{
+		ft_putnbr(v2->i);
+		write(1, " ", 1);
+		ft_putnbr(v2->j);
+		write(1, "\n", 1);
 		return (1);
+	}
+	v2->possible = 0;
+	v2->k = 0;
+	(v2->j)++;
+	return (1);
+}
+
+int		ft_test(t_data *data)
+{
+	t_v2	*v2;
+
+	v2 = (t_v2*)malloc(sizeof(t_v2));
+	ft_initialization2(v2);
+	while (v2->i < data->board[0])
+	{
+		while (v2->j < data->board[1])
+		{
+			v2->midwhat = ft_midground(v2, data);
+			if (v2->midwhat == 0)
+				return (0);
+			if (v2->midwhat == 1)
+				return (1);
+			if (v2->midwhat == 2)
+				break ;
+		}
+		v2->j = 0;
+		(v2->i)++;
+	}
+	free(v2);
+	write(1, "0 0\n", 4);
 	return (0);
 }
-
-void	ft_place_heat(t_data *data)
-{
-	/*if (ft_possible_heat(data) == 0)
-	{
-		write (FDtest, "COUCOU\n", 7);
-		ft_test(data);//ft_rush
-	}*/
-	ft_possible_heat(data);
-}
-
-
-
-
-
-
-
-
-
-

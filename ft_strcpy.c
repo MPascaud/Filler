@@ -6,17 +6,15 @@
 /*   By: mpascaud <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 16:24:49 by mpascaud          #+#    #+#             */
-/*   Updated: 2018/03/08 16:25:08 by mpascaud         ###   ########.fr       */
+/*   Updated: 2018/04/04 12:53:08 by mpascaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "filler.h"
 
-
-char    *ft_strcpy(char *dest, const char *src)
+char	*ft_strcpy(char *dest, const char *src)
 {
-	int     i;
+	int		i;
 
 	i = 0;
 	if (!dest || !src)
@@ -29,4 +27,3 @@ char    *ft_strcpy(char *dest, const char *src)
 	dest[i] = '\0';
 	return (dest);
 }
-

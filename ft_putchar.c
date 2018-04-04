@@ -6,15 +6,13 @@
 /*   By: mpascaud <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 17:26:57 by mpascaud          #+#    #+#             */
-/*   Updated: 2018/03/16 17:27:37 by mpascaud         ###   ########.fr       */
+/*   Updated: 2018/04/03 19:09:24 by mpascaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "filler.h"
 
-void    ft_putchar(char c)
+void	ft_putchar(char c)
 {
 	write(1, &c, 1);
 }
-

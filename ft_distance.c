@@ -1,38 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_piece.c                                         :+:      :+:    :+:   */
+/*   ft_heatmap.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpascaud <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/16 17:16:25 by mpascaud          #+#    #+#             */
-/*   Updated: 2018/04/03 18:29:17 by mpascaud         ###   ########.fr       */
+/*   Created: 2018/03/16 17:07:35 by mpascaud          #+#    #+#             */
+/*   Updated: 2018/04/04 15:43:10 by mpascaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-void	ft_piece(t_data *data, char *tmp)
+int		ft_distance(t_data *data)
 {
-	int		nb;
-	int		i;
-
-	data->piece = (int*)malloc(sizeof(int) * 3);
-	nb = 0;
-	i = 6;
-	while (tmp[i] != ' ')
-	{
-		nb = (nb * 10) + (tmp[i] - '0');
-		i++;
-	}
-	data->piece[0] = nb;
-	nb = 0;
-	i++;
-	while (tmp[i] != ':')
-	{
-		nb = (nb * 10) + (tmp[i] - '0');
-		i++;
-	}
-	data->piece[1] = nb;
-	data->piece[2] = '\0';
+	if (data->board[0] == 100)
+		return (100);
+	else
+		return (58);
 }

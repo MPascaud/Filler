@@ -6,17 +6,16 @@
 /*   By: mpascaud <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 17:19:17 by mpascaud          #+#    #+#             */
-/*   Updated: 2018/03/16 17:19:33 by mpascaud         ###   ########.fr       */
+/*   Updated: 2018/04/03 19:10:49 by mpascaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "filler.h"
 
-void    ft_war(t_data *data, char *tmp, int war)
+void	ft_war(t_data *data, char *tmp, int war)
 {
-	int     i;
-	int     k;
+	int		i;
+	int		k;
 
 	i = 4;
 	k = 0;
@@ -29,4 +28,3 @@ void    ft_war(t_data *data, char *tmp, int war)
 	}
 	data->war[war][k] = '\0';
 }
-

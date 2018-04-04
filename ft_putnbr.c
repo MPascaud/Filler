@@ -6,15 +6,13 @@
 /*   By: mpascaud <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 17:29:18 by mpascaud          #+#    #+#             */
-/*   Updated: 2018/03/16 17:29:33 by mpascaud         ###   ########.fr       */
+/*   Updated: 2018/04/04 12:50:53 by mpascaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-
 #include "filler.h"
 
-void    ft_putnbr(int nb)
+void	ft_putnbr(int nb)
 {
 	if (nb < 0)
 	{
@@ -32,4 +30,3 @@ void    ft_putnbr(int nb)
 	}
 	ft_putchar((nb % 10) + '0');
 }
-

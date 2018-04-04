@@ -6,184 +6,117 @@
 /*   By: mpascaud <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 16:38:30 by mpascaud          #+#    #+#             */
-/*   Updated: 2018/03/21 16:23:10 by mpascaud         ###   ########.fr       */
+/*   Updated: 2018/04/04 16:20:16 by mpascaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-
-
-
 #include "filler.h"
 
-
-
-void	ft_free(t_data **data, int *war, int *shapiece)
+void	ft_whoami(char ***tmp, t_data ***data)
 {
-	int		i;
+	if (ft_strstr(*(*tmp), "mpascaud"))
+	{
+		if ((*(*tmp))[10] == '1')
+		{
+			(*(*data))->me = 126;
+			(*(*data))->opp = 127;
+		}
+		else
+		{
+			(*(*data))->me = 127;
+			(*(*data))->opp = 126;
+		}
+	}
+}
 
-	i = 0;
-	(*war) = 0;
-	(*shapiece) = 0;
-	free((*data)->board);
-	while ((*data)->war[i])
+void	ft_whatzemap(char ***tmp, t_data ***data, int **war)
+{
+	if ((*(*tmp))[0] >= 48 && (*(*tmp))[0] <= 57)
 	{
-		free((*data)->war[i]);
-		i++;
+		if (*(*war) == 0)
+			(*(*data))->war = (char**)malloc(sizeof(char*)
+					* ((*(*data))->board[0] + 1));
+		ft_war(*(*data), *(*tmp), *(*war));
+		(*(*war))++;
+		if (*(*war) == (*(*data))->board[0])
+			(*(*data))->war[*(*war)] = NULL;
 	}
-	free((*data)->war[i]);
-	free((*data)->war);
-	free((*data)->piece);
-	i = 0;
-	while ((*data)->shapiece[i])
+}
+
+int		ft_ins(char **tmp, t_data **data, int *war, int *shapiece)
+{
+	if (*tmp == NULL)
+		return (0);
+	ft_whoami(&tmp, &data);
+	if (ft_strstr((*tmp), "Plateau"))
+		ft_board((*data), *tmp);
+	ft_whatzemap(&tmp, &data, &war);
+	if (ft_strstr(*tmp, "Piece"))
+		ft_piece(*data, *tmp);
+	if ((*tmp)[0] == '.' || (*tmp)[0] == '*')
 	{
-		free((*data)->shapiece[i]);
-		i++;
+		if (*shapiece == 0)
+			(*data)->shapiece = (char**)malloc(sizeof(char*)
+					* ((*data)->piece[0] + 1));
+		ft_shapiece(*data, *tmp, *shapiece);
+		(*shapiece)++;
+		if (*shapiece == (*data)->piece[0])
+		{
+			(*data)->shapiece[*shapiece] = NULL;
+			return (2);
+		}
 	}
-	free((*data)->shapiece[i]);
-	free((*data)->shapiece);
+	return (1);
+}
+
+int		ft_outside(int *war, t_data **data, int *shapiece, char **tmp)
+{
+	if (*war == 0)
+		return (2);
+	ft_hot(*data);
+	if (ft_possible(*data) == 1)
+	{
+		ft_place_heat(*data);
+	}
+	if (ft_possible(*data) == 0)
+		if (ft_2ndchance(*data) == 0)
+		{
+			if ((*data)->board[1] == 0)
+				return (0);
+			ft_free(&(*data), &(*war), &(*shapiece));
+			free(*tmp);
+			free(*data);
+			write(1, "0 0\n", 4);
+			return (0);
+		}
+	ft_free(&(*data), &(*war), &(*shapiece));
+	return (1);
 }
 
 int		main(void)
 {
-	char	*tmp;
-	t_data	*data;
-	int		war;
-	int		shapiece;
-//	int		impossible;
+	t_v		*v;
 
-	war = 0;
-	shapiece = 0;
-//	impossible = 0;
-	data = (t_data*)malloc(sizeof(t_data));
+	v = (t_v*)malloc(sizeof(t_v));
+	ft_initialization(v);
 	while (1)
 	{
-		while (get_next_line(0, &tmp))
+		while (get_next_line(0, &(v->tmp)))
 		{
-		//	/*if (tmp[0] == '=' ||*/ tmp == NULL/*ajout anti leaks et seg*/)//si on ne peut plus poser
-		//	{
-				//write (1, "0 0\n", 4);
-				//free data
-				//break ;
-		//		return (0);
-		//	}
-		//	if (tmp[0] == '\0')
-		//		return(0);
-			if (ft_strstr(tmp, "mpascaud"))
-			{
-				if (tmp[10] == '1')
-				{
-			//		data->me = 'O';
-			//		data->opp = 'X';
-					data->me = 126;
-					data->opp = 127;
-				}
-				else
-				{
-			//		data->me = 'X';
-			//		data->opp = 'O';
-					data->me = 127;
-					data->opp = 126;
-				}
-			}
-			if (ft_strstr(tmp, "Plateau"))
-			{
-				ft_board(data, tmp);
-			}
-			if (tmp[0] >= 48 && tmp[0] <= 57)
-			{
-				if (war == 0)
-				{
-					data->war = (char**)malloc(sizeof(char*) * (data->board[0] + 1));
-				}
-				ft_war(data, tmp, war);
-				war++;
-				if (war == data->board[0] || tmp == NULL/*rajout segfault*/)
-				{
-					data->war[war] = (char*)malloc(sizeof(char));
-					data->war[war] = NULL;
-				}
-			}
-			if (ft_strstr(tmp, "Piece"))
-			{
-				ft_piece(data, tmp);
-			}
-			if (tmp[0] == '.' || tmp[0] == '*')
-			{
-				if (shapiece == 0)
-				{
-					data->shapiece = (char**)malloc(sizeof(char*) * (data->piece[0] + 1));
-				}
-				ft_shapiece(data, tmp, shapiece);
-				shapiece++;
-				if (shapiece == data->piece[0] /*|| tmp == NULL*//*2e rajout segfault*/)
-				{
-					data->shapiece[shapiece] = (char*)malloc(sizeof(char));
-					data->shapiece[shapiece] = NULL;
-					//	write(1, "0 0\n", 4);
-					//write(1, "8 2\n", 4);
-					//	write(1, "12 14\n", 6);
-			//		free(tmp);
-			//		tmp = NULL;
-					break ;
-				}
-			}
-			//if (ft_possible(data) == 0)
-			//	break ;
-		//	if (impossible == 1)
-		//		break ;
-			free(tmp);
-			tmp = NULL;
+			v->what = ft_ins(&(v->tmp), &(v->data), &(v->war), &(v->shapiece));
+			if (v->what == 0)
+				return (0);
+			free(v->tmp);
+			v->tmp = NULL;
+			if (v->what == 2)
+				break ;
 		}
-		ft_heatmap(data);
-		ft_heatmap2(data);
-		ft_afficher_variables(data, tmp, war, shapiece);
-	//	ft_possible(data);
-	/*	if (ft_possible(data) == 0)
-		{
-		//	write(FDtest, "pad place\n", 10);
-		//	write(1, "0 0\n", 4);
-		//	impossible = 1;
-			//break ;
+		v->what = ft_outside(&(v->war), &(v->data), &(v->shapiece), &(v->tmp));
+		if ((v->what) == 0)
 			return (0);
-		}*/
-		if (ft_possible(data) == 0) //&& ft_possible2 == 0
-		{
-			ft_free(&data, &war, &shapiece);
-			free(data);
-			write(FDtest, "placement impossible\n", 21);
-			write (1, "0 0\n", 4);
-			return (0);
-		}
-//		if (ft_test(data) == 0)
-//			return (0);
-		if (ft_possible(data) == 1)
-		{
-			ft_place_heat(data);//if possible == 1
-		         	           //if possible == 0 && possible2 == 1
-		}
-//	ft_test(data);			
-//		sleep(1);
-//		if (tmp[0] == '=')
-//			break ;
-	//	if (tmp == NULL || tmp[0] == '\0')
-	//		break ;
-	//	if (tmp != NULL)
-	//	{
-		//	free(tmp);
-		//	tmp = NULL;
-	//	}
-		if (tmp == NULL)
+		if ((v->what) == 2)
 			break ;
-	//	if (impossible == 1)
-	//	{
-			//write(1, "0 0\n", 4);
-	//		ft_free(&data, &war, &shapiece);
-	//		break ;
-	//	}
-	//	while (1);
-		ft_free(&data, &war, &shapiece);
 	}
-	free(data);
+	ft_free2(v);
 	return (0);
 }

@@ -6,17 +6,15 @@
 /*   By: mpascaud <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 16:22:26 by mpascaud          #+#    #+#             */
-/*   Updated: 2018/03/08 16:23:05 by mpascaud         ###   ########.fr       */
+/*   Updated: 2018/04/04 12:52:22 by mpascaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-
 #include "filler.h"
 
-size_t      ft_strlen(const char *s)
+size_t		ft_strlen(const char *s)
 {
-	size_t      i;
+	size_t		i;
 
 	i = 0;
 	if (!s)
@@ -27,4 +25,3 @@ size_t      ft_strlen(const char *s)
 	}
 	return (i);
 }
-

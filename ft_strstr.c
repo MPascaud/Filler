@@ -6,17 +6,16 @@
 /*   By: mpascaud <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 16:26:13 by mpascaud          #+#    #+#             */
-/*   Updated: 2018/03/08 16:26:30 by mpascaud         ###   ########.fr       */
+/*   Updated: 2018/04/02 19:03:47 by mpascaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "filler.h"
 
-char    *ft_strstr(const char *haystack, const char *needle)
+char	*ft_strstr(const char *haystack, const char *needle)
 {
-	int     i;
-	int     j;
+	int		i;
+	int		j;
 
 	i = 0;
 	j = 0;
@@ -39,4 +38,3 @@ char    *ft_strstr(const char *haystack, const char *needle)
 	}
 	return (0);
 }
-
